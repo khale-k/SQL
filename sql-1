@@ -1,0 +1,90 @@
+-- 1.tables
+-- 2.data types
+-- 3. constraints
+-- 3.basic sql query
+
+create database user;
+
+use user;
+
+drop database user;
+
+-- data types
+
+-- smallint , int, bigint, decimal
+-- char, varchar(size)
+-- date, time, datetime,timestamp
+-- boolean
+
+
+-- contstraints
+
+-- not null
+-- unique
+-- default
+-- check
+-- primary key
+-- foreign key
+-- auto_increment
+
+create table users(
+uid int primary key,
+uname varchar(50) not null,
+email varchar(30) unique not null,
+pswd varchar(200) not null,
+age smallint check(age>=18),
+status varchar(10) default "active",
+createdAt datetime default current_timestamp
+);
+
+-- modifying table schema
+
+alter table users
+add uaddress varchar(50);
+
+alter table users
+modify email varchar(50) unique not null;
+
+-- rename cols
+
+alter table users
+change column uaddress address varchar(50);
+
+-- delete col
+
+alter table users 
+drop address; 
+
+-- rename table
+
+ alter table userlist
+ rename to users;
+ 
+ insert into users (uid,uname,email,pswd,age) 
+ values (1,"khaled","ksmdkhaled2003@gmail.com","abcd",20);
+ 
+ insert into users(uid,uname,email,pswd,age)
+ values
+ (2,"shaziya","kolimishaziya@gmail.com","absdf",29),
+ (3,"sadiqa","sadiqa@gmail.com","asdfas",45);
+ 
+ -- delete data from tables
+ -- delete
+--  truncate
+--  drop
+
+delete from users where uid=1;
+
+truncate table users;
+   
+drop table users; 
+ 
+ -- updating records
+ 
+ update users
+ set uname="hiddu"
+ where uid=1;
+ 
+ 
+ 
+ 
