@@ -86,5 +86,44 @@ drop table users;
  where uid=1;
  
  
+ -- practice 
+ 
+ create database schooldb;
+ use schooldb;
+ 
+ 
+ create table students(
+ stid int primary key,
+ stname varchar(50) not null,
+ email varchar(50) unique not null,
+ age smallint check (age>18),
+ course varchar(50) default "BCA"
+ );
+ 
+ insert into students(stid, stname, email, age, course) values
+ (1,"Khaled","ksmdkhaled2003@gmail.com",20,"BTECH"),
+ (2,"Shaziya","kolimishaikshaziya@gmail.com",21,"BCA");
+ 
+ update students
+ set course="MCA"
+ where stid=1;
+ 
+ update students 
+ set age=25
+ where stid=2;
+ 
+ delete from students where stid=2; 
+ 
+ 
+ truncate table students;
+ 
+ drop table students;
+ 
+ drop database schooldb;
+ 
+ 
+ 
+ 
+ 
  
  
