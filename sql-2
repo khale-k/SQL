@@ -1,1 +1,109 @@
 
+
+ 
+ --------------------------------------------------- Session 2
+--  select
+--  select with where
+--  comparision operators
+--  logical operators
+--  sorting(order by) and limiting data 
+
+CREATE DATABASE company;
+use company;
+
+CREATE TABLE department (
+    deptid INT PRIMARY KEY,
+    deptname VARCHAR(50),
+    location VARCHAR(50),
+    budget DECIMAL(10,2)
+);
+
+INSERT INTO department (deptid, deptname, location, budget) VALUES
+(1, 'HR', 'Hyderabad', 50000),
+(2, 'Finance', 'Mumbai', 120000),
+(3, 'IT', 'Bangalore', 200000),
+(4, 'Marketing', 'Delhi', 80000),
+(5, 'Sales', 'Chennai', 90000),
+(6, 'Support', 'Pune', 60000),
+(7, 'R&D', 'Bangalore', 250000),
+(8, 'Admin', 'Hyderabad', 40000),
+(9, 'Logistics', 'Kolkata', 70000),
+(10, 'Legal', 'Delhi', 95000),
+(11, 'Operations', 'Mumbai', 110000),
+(12, 'Procurement', 'Chennai', 75000),
+(13, 'Quality', 'Pune', 65000),
+(14, 'Training', 'Hyderabad', 55000),
+(15, 'Security', 'Delhi', 45000),
+(16, 'Design', 'Bangalore', 130000),
+(17, 'Product', 'Mumbai', 140000),
+(18, 'Customer Success', 'Chennai', 85000),
+(19, 'Data Analytics', 'Bangalore', 160000),
+(20, 'Public Relations', 'Delhi', 72000);
+
+
+select * from department;
+
+select deptid,deptname,location from department;
+
+select deptid as id, deptname as name ,location as place from department;
+
+select * from department where location="Delhi";
+
+-- operators in where clause
+-- !=
+-- > or < or >=
+-- between.... and --> where budget between 2000 and 3000
+-- in   where location in ("Delhi","Bangalore")
+-- not in 
+-- like where deptname like M%
+-- not like
+
+select deptid as id , deptname as name, budget as price from department where budget between 2000 and 30000;
+select deptname as name from department where location in ("Hyderabad","Delhi");
+
+select deptid, deptname, location from department where location like '%h%';
+
+
+-- Logical operators
+
+-- and  where location="Hyderabad" and budget>300000
+-- or  where location ="Delhi" or budget<500000
+-- not where not location="Chennai"
+-- is null  
+-- is not null
+
+select deptid, deptname, location from department where location ="Hyderabad" and budget >20000;
+
+select deptid, deptname,location, budget from department where location ="Bangalore" or location ="Chennai";
+
+select location  from department where not location ="Chennai";
+
+update department
+set budget=null where deptid in(2,6,7);
+
+select deptid, deptname, location, budget from department where budget is null;
+
+select deptid, deptname, location ,budget from department where budget is not null;
+
+-- sorting
+
+select * from department order by budget asc; 
+
+select * from department order by location desc;
+
+-- limitation
+select * from department order by deptid asc limit 10;
+
+
+select * from department limit 6,5;
+
+
+-- Practice set 2
+
+select deptname from department where deptname like "%n%";
+
+select * from department where location="Hyderabad" and budget>30000;
+
+select * from department where location in ("Hyderabad", "Bangalore") or  location in ("Delhi","Mumbai");
+
+select deptname,budget from department order by budget desc limit 3;
