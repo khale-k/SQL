@@ -1,1 +1,100 @@
 
+
+----------------------------------------------------------------------------------- Session 3
+
+-- String functions
+-- number functions
+-- aggregate functions
+-- groupby 
+
+
+-- string functions
+
+-- upper()         select deptname,upper(deptname) from department
+-- lower()		   select deptname,lower(deptname) from department
+-- concat()        select concat(deptname,'-',location)from department
+-- substring()     select deptname,substring(deptname,1,4) from department
+-- length()        select deptname,length(deptname) from department
+-- trim()          select trim(deptname) from department
+
+select upper(deptname) as deptname from department;
+select lower(deptname) as deptname from department;
+
+select concat(deptname,"       -        ",location) as namelocation from department;
+
+
+select deptname,substring(deptname,2,5) from department;
+
+select budget,length(budget) from department;
+
+
+
+-- Number funtions 
+
+-- abs()                   select abs(-25)
+-- round(x,y)              select round(123.456,2) 123.45
+-- floor()                 select floor(10.9) 10
+-- cell()                  select cell(10.1) 11
+-- mod(x,y)                select mod(17,2) 2
+
+select floor(budget) from department;
+
+-- Aggregate functions 
+
+-- count()		select count(*) from departments 
+
+-- sum()		select sum(budget) from departments
+
+-- avg()		select avg(budget) from departments
+
+-- max()		select max(budget) from departments
+
+-- min()		select min(budget) from departments
+
+delete from department
+where deptid in (
+select deptid from (
+select deptid from department where budget is null
+) as temp
+);
+
+select * from department;
+
+select count(*) as count , avg(budget), sum(budget)/count(*) from department;
+
+
+
+-- groupby
+
+select location,sum(budget) as totalbudget 
+from department
+group by location;
+
+
+select location,min(budget) from department 
+group by location ;
+
+
+
+-- Having  ------ only when we are using condition for aggregate functions
+
+
+select location,count(*) as deptcount
+from department
+group by location
+having count(*) >2;
+
+
+
+-- practice set -3 
+
+-- find reminder when each dept budget is divided by 100000 using numberic fuc
+
+select deptname,sum(budget) , mod(sum(budget),100000) from department 
+group by deptname;
+
+select location ,max(budget) from department 
+group by location
+order by max(budget) desc ;
+
+
