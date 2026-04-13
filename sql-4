@@ -1,0 +1,108 @@
+
+
+-- -----------------------------------------------------------------------------------------------session4
+
+
+-- Keys
+-- relationship
+-- combine data from tables
+-- join
+-- inner join
+-- left join 
+-- right join 
+-- self join
+
+
+-- keys
+
+-- primary key    -- unique , not null. only one primary key in table 
+
+-- foreign key  -- one table primary key linked to another table then it is foreign key
+
+
+create table emp(
+empid int primary key,
+empname varchar(50) not null,
+salary int,
+deptid int,
+foreign key(deptid) references department(deptid)
+);
+
+INSERT INTO emp (empid, empname, salary, deptid) VALUES
+(4, "Ayaan", 25000, 2),
+(5, "Zoya", 30000, 1),
+(6, "Rehan", 45000, 3),
+(7, "Ibrahim", 60000, 2),
+(8, "Sara", 70000, 4),
+(9, "Ali", 55000, 5),
+(10, "Fatima", 48000, 1),
+(11, "Omar", 52000, 2),
+(12, "Noor", 61000, 3),
+(13, "Hassan", 75000, 4),
+(14, "Aisha", 68000, 5),
+(15, "Bilal", 72000, 2),
+(16, "Maryam", 80000, 1),
+(17, "Yusuf", 90000, 3),
+(18, "Sameer", 35000, 4),
+(19, "Imran", 40000, 5),
+(20, "Kiran", 65000, 2);
+ 
+ 
+ insert into emp (empid, empname, salary, deptid) VALUES
+ (21, "Sreeja", 40000, null),
+ (23, "Sreenidhi", 80000, null),
+(22, "Sathvika", 40000, null);
+
+ select * from emp;
+ 
+ -- whole data of two tables
+
+-- inner join
+
+select e.empid, e.empname,e.salary,d.deptname,d.location
+from emp e inner join department d
+on e.deptid = d.deptid
+order by empid;
+
+
+-- Left Join   ---> return all emp details including those without a dept  and not matching depat
+
+select e.empid, e.empname, e.salary,d.deptid,d.deptname,d.location
+from emp e left join department d
+on e.deptid=d.deptid;
+
+
+-- Right Join 
+
+
+select e.empid, e.empname, e.salary,d.deptid,d.deptname,d.location
+from emp e right join department d
+on e.deptid=d.deptid;
+
+
+-- 1. find emp who donto belong to any department
+
+select e.empid, e.empname,e.salary, e.deptid
+from emp e where e.deptid is null;
+ 
+ select e.deptid,d.deptname,count(*) as total
+ from emp e inner join department d
+ on e.deptid=d.deptid
+ group by e.deptid;
+ 
+ select e.deptid,d.deptname,sum(e.salary) as total
+ from emp e inner join department d
+ on e.deptid= d.deptid
+ group by e.deptid;
+ 
+ select e.deptid,d.deptname,max(e.salary) as maximum
+ from emp e inner join department d
+ on e.deptid= d.deptid
+ group by e.deptid;
+ 
+ select e.deptid,d.deptname,count(*) 
+ from emp e inner join department d
+ on e.deptid=d.deptid
+ group by e.deptid
+ having count(*)>3;
+ 
